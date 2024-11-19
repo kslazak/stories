@@ -38,6 +38,5 @@ If time allows the following changes could be introduced:
 - Logging to a file.
 - Using different logging levels (e.g. General, Debug, etc.) so that more details can be logged in the Debug mode, while only general information is being logged in Production code. Warnings and errors should always be logged.
 - Wrapping the DateTime type in order to be able to mock it in unit tests for more accurate testing of time values.
-- Wrapping the configuration in order to be able to mock it in unit tests and simulate different configuration values.
 - Adding behavior tests.
 - Adding load tests and/or stress tests.
