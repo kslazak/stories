@@ -1,6 +1,8 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using StoriesAPI;
+using ConfigurationProvider = StoriesAPI.ConfigurationProvider;
+using IConfigurationProvider = StoriesAPI.IConfigurationProvider;
 
 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 var apiInfo = new OpenApiInfo
@@ -13,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IStoryProvider, StoryProvider>();
+builder.Services.AddSingleton<IConfigurationProvider, ConfigurationProvider>();
 builder.Services.AddSingleton<IStoryCache, StoryCache>();
 builder.Services.AddSingleton<IStoryService, StoryService>();
 builder.Services.AddControllers()

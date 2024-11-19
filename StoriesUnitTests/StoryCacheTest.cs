@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using StoriesAPI;
@@ -10,7 +9,7 @@ namespace StoriesUnitTests;
 public class StoryCacheTest
 {
     private ILogger<StoryCache> _logger;
-    private IConfiguration _configuration;
+    private IConfigurationProvider _configurationProvider;
     private IHttpContextAccessor _httpContextAccessor;
     private StoryCache _sut;
 
@@ -18,10 +17,10 @@ public class StoryCacheTest
     public void Setup()
     {
         _logger = Substitute.For<ILogger<StoryCache>>();
-        _configuration = Substitute.For<IConfiguration>();
+        _configurationProvider = Substitute.For<IConfigurationProvider>();
         _httpContextAccessor = Substitute.For<HttpContextAccessor>();
 
-        _sut = new StoryCache(_logger, _configuration, _httpContextAccessor);
+        _sut = new StoryCache(_logger, _configurationProvider, _httpContextAccessor);
     }
 
     #region GetBestStoryIds tests
@@ -31,6 +30,33 @@ public class StoryCacheTest
     [TestCase(200)]
     public void GetBestStoryIdsShouldReturnNullWhenNoIdsAreCached(int count)
     {
+        var results = _sut.GetBestStoryIds(count);
+
+        Assert.That(results == null);
+    }
+
+    [TestCase(1)]
+    [TestCase(100)]
+    [TestCase(200)]
+    public void GetBestStoryIdsShouldReturnNullWhenCachingIsDisabled(int count)
+    {
+        _configurationProvider.GetCacheRetentionSeconds().Returns("0");
+        _sut.SetBestStoryIds(TestUtils.CreateListOfIds(count));
+
+        var results = _sut.GetBestStoryIds(count);
+
+        Assert.That(results == null);
+    }
+
+    [TestCase(1)]
+    [TestCase(100)]
+    [TestCase(200)]
+    public void GetBestStoryIdsShouldReturnNullWhenCachedIdsHaveExpired(int count)
+    {
+        _configurationProvider.GetCacheRetentionSeconds().Returns("1");
+        _sut.SetBestStoryIds(TestUtils.CreateListOfIds(count));
+        Thread.Sleep(1001);
+
         var results = _sut.GetBestStoryIds(count);
 
         Assert.That(results == null);
@@ -86,6 +112,31 @@ public class StoryCacheTest
     [Test]
     public void GetStoryShouldReturnNullWhenRequestedStoryIsNotFoundInCache()
     {
+        var result = _sut.GetStory(1);
+
+        Assert.That(result == null);
+    }
+
+    [Test]
+    public void GetStoryShouldReturnNullWhenCachingIsDisabled()
+    {
+        _configurationProvider.GetCacheRetentionSeconds().Returns("0");
+        var story = TestUtils.CreateStory();
+        _sut.AddOrUpdateStory(1, story);
+
+        var result = _sut.GetStory(1);
+
+        Assert.That(result == null);
+    }
+
+    [Test]
+    public void GetStoryShouldReturnNullWhenStoryHasExpired()
+    {
+        _configurationProvider.GetCacheRetentionSeconds().Returns("1");
+        var story = TestUtils.CreateStory();
+        _sut.AddOrUpdateStory(1, story);
+        Thread.Sleep(1001);
+
         var result = _sut.GetStory(1);
 
         Assert.That(result == null);

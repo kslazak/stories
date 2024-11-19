@@ -6,13 +6,13 @@ namespace StoriesAPI;
 /// <summary>
 /// Provides story cache with configurable retention period.
 /// </summary>
-public class StoryCache(ILogger<StoryCache> logger, IConfiguration configuration,
+public class StoryCache(ILogger<StoryCache> logger, IConfigurationProvider configurationProvider,
     IHttpContextAccessor httpContextAccessor) : IStoryCache
 {
     private const int InfiniteRetention = -1;
 
     private readonly ILogger<StoryCache> _logger = logger;
-    private readonly IConfiguration _configuration = configuration;
+    private readonly IConfigurationProvider _configurationProvider = configurationProvider;
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     private readonly object _configLock = new();
     private readonly ReaderWriterLockSlim _listLock = new();
@@ -139,7 +139,7 @@ public class StoryCache(ILogger<StoryCache> logger, IConfiguration configuration
     private int GetCacheRetentionFromConfig()
     {
         var defaultValueDescription = $"Assuming the default value of {InfiniteRetention} (infinite retention).";
-        var configuredValue = _configuration["CacheRetentionSeconds"];
+        var configuredValue = _configurationProvider.GetCacheRetentionSeconds();
         if (configuredValue == null)
         {
             _logger.LogAsWarning($"CacheRetentionSeconds not found in config file. {defaultValueDescription}",
