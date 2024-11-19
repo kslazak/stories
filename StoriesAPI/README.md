@@ -28,7 +28,6 @@ You can also use the following URL to see API definition and call it using *Swag
 - The documentation does not explicitly state how many items are being returned by https://hacker-news.firebaseio.com/v0/beststories.json but the actual number returned is 200, so the number of requested stories must be a value between 1 and 200.
 - The documentation does not expicitly state that the results returned by https://hacker-news.firebaseio.com/v0/beststories.json are sorted by score but it can be inferred from the context and it has been confirmed by checking the returned results, so we assume the results are sorted.
 - The value of *commentCount* is taken from *descendants* property (total comment count) rather than from the *kids* property (direct comments).
-- 
 
 ## Additional Considerations
 
@@ -37,7 +36,7 @@ If time allows the following changes could be introduced:
 - Logging to a file.
 - Using different logging levels (e.g. General, Debug, etc.) so that more details can be logged in the Debug mode, while only general information is being logged in Production code. Warnings and errors should always be logged.
 - Wrapping the DateTime type in order to be able to mock it in unit tests for more accurate testing of time values.
-- Wrapping the configuration in order to be able to mock it in unit test and simulate different configuration values.
+- Wrapping the configuration in order to be able to mock it in unit tests and simulate different configuration values.
 - Adding integration tests.
 - Adding behavior tests.
 - Adding load tests and/or stress tests.
