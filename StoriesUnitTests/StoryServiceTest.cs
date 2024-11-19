@@ -59,10 +59,8 @@ public class StoryServiceTest
     [TestCase(200, 190)]
     public void WhenStoryIdsAreNotFoundInCacheGetBestStoryIdsShouldInvokeStoryProviderAndReturnTheRelevantNumberOfIds(int requestedCount, int providedCount)
     {
-        var idsRetrievalTask = new Task<List<int>>(() => TestUtils.CreateListOfIds(providedCount));
-        idsRetrievalTask.RunSynchronously();
         _storyCache.GetBestStoryIds(requestedCount).Returns(default(List<int>));
-        _storyProvider.GetBestStoryIds().Returns(idsRetrievalTask);
+        _storyProvider.GetBestStoryIds().Returns(Task.FromResult(TestUtils.CreateListOfIds(providedCount)));
 
         var results = _sut.GetBestStoryIds(requestedCount);
 
@@ -76,10 +74,8 @@ public class StoryServiceTest
     public void WhenStoryIdsAreNotFoundInCacheGetBestStoryIdsShouldInvokeStoryProviderAndUpdateTheCache(int requestedCount, int providedCount)
     {
         var ids = TestUtils.CreateListOfIds(providedCount);
-        var idsRetrievalTask = new Task<List<int>>(() => ids);
-        idsRetrievalTask.RunSynchronously();
         _storyCache.GetBestStoryIds(requestedCount).Returns(default(List<int>));
-        _storyProvider.GetBestStoryIds().Returns(idsRetrievalTask);
+        _storyProvider.GetBestStoryIds().Returns(Task.FromResult(ids));
 
         _sut.GetBestStoryIds(requestedCount);
 
