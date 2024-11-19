@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesAPI", "StoriesAPI\StoriesAPI.csproj", "{F77ED1FC-5CEE-403E-BA77-5E7B28098C0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoriesUnitTests", "StoriesUnitTests\StoriesUnitTests.csproj", "{4282256E-31D3-4AD1-9AF5-90E46ABE0250}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F77ED1FC-5CEE-403E-BA77-5E7B28098C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F77ED1FC-5CEE-403E-BA77-5E7B28098C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F77ED1FC-5CEE-403E-BA77-5E7B28098C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F77ED1FC-5CEE-403E-BA77-5E7B28098C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4282256E-31D3-4AD1-9AF5-90E46ABE0250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4282256E-31D3-4AD1-9AF5-90E46ABE0250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4282256E-31D3-4AD1-9AF5-90E46ABE0250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4282256E-31D3-4AD1-9AF5-90E46ABE0250}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9959C079-5263-436C-A242-C8C2CC19E223}
+	EndGlobalSection
+EndGlobal

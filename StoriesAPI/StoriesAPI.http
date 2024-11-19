@@ -1,0 +1,6 @@
+@Stories_HostAddress = http://localhost:5001
+
+GET {{Stories_HostAddress}}/api/stories/best?count=1
+Accept: application/json
+
+###
