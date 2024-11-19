@@ -14,6 +14,8 @@ The following cache retention values are allowed:
 - 0 (no caching)
 -  1 .. 2147483647 (1 .. 2147483647 seconds)
 
+If an invalid retention period (or no retention period) is specified in a config file, the default value of infinite retention is being assumed.
+
 ## Usage
 
 Using any HTTP client (e.g. an internet browser) request the following URL:
