@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using StoriesAPI;
+using StoriesAPI.Models;
 
 namespace StoriesUnitTests;
 
@@ -121,7 +122,7 @@ public class StoryCacheTest
     public void GetStoryShouldReturnNullWhenCachingIsDisabled()
     {
         _configurationProvider.GetCacheRetentionSeconds().Returns("0");
-        var story = TestUtils.CreateStory();
+        var story = new Story();
         _sut.AddOrUpdateStory(1, story);
 
         var result = _sut.GetStory(1);
@@ -133,7 +134,7 @@ public class StoryCacheTest
     public void GetStoryShouldReturnNullWhenStoryHasExpired()
     {
         _configurationProvider.GetCacheRetentionSeconds().Returns("1");
-        var story = TestUtils.CreateStory();
+        var story = new Story();
         _sut.AddOrUpdateStory(1, story);
         Thread.Sleep(1001);
 
@@ -145,7 +146,7 @@ public class StoryCacheTest
     [Test]
     public void GetStoryShouldReturnTheRelevantStoryWhenItIsFoundInCache()
     {
-        var story = TestUtils.CreateStory();
+        var story = new Story();
         _sut.AddOrUpdateStory(1, story);
 
         var result = _sut.GetStory(1);
@@ -160,8 +161,8 @@ public class StoryCacheTest
     [Test]
     public void AddOrUpdateStoryShouldUpdateTheCachedStory()
     {
-        var story = TestUtils.CreateStory();
-        var updatedStory = TestUtils.CreateStory();
+        var story = new Story();
+        var updatedStory = new Story();
         _sut.AddOrUpdateStory(1, story);
 
         _sut.AddOrUpdateStory(1, updatedStory);

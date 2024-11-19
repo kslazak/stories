@@ -93,7 +93,7 @@ public class StoryServiceTest
     {
         var ids = TestUtils.CreateListOfIds(count);
         foreach (var id in ids)
-            _storyCache.GetStory(id).Returns(TestUtils.CreateStory());
+            _storyCache.GetStory(id).Returns(new Story());
 
         var results = _sut.GetStories(ids);
 
@@ -108,7 +108,7 @@ public class StoryServiceTest
     {
         var ids = TestUtils.CreateListOfIds(count);
         foreach (var id in ids)
-            _storyCache.GetStory(id).Returns(TestUtils.CreateStory());
+            _storyCache.GetStory(id).Returns(new Story());
 
         _sut.GetStories(ids);
 
@@ -120,7 +120,7 @@ public class StoryServiceTest
     [TestCase(200)]
     public void WhenNoStoriesAreFoundInCacheGetStoriesShouldInvokeStoryProviderAndReturnTheStories(int count)
     {
-        var storyRetrievalTask = new Task<Story?>(TestUtils.CreateStory);
+        var storyRetrievalTask = new Task<Story?>(() => new Story());
         storyRetrievalTask.RunSynchronously();
         var ids = TestUtils.CreateListOfIds(count);
         foreach (var id in ids)
@@ -139,7 +139,7 @@ public class StoryServiceTest
     [TestCase(200)]
     public void WhenNoStoriesAreFoundInCacheGetStoriesShouldInvokeStoryProviderAndUpdateStoryCache(int count)
     {
-        var storyRetrievalTask = new Task<Story?>(TestUtils.CreateStory);
+        var storyRetrievalTask = new Task<Story?>(() => new Story());
         storyRetrievalTask.RunSynchronously();
         var ids = TestUtils.CreateListOfIds(count);
         foreach (var id in ids)
@@ -157,11 +157,11 @@ public class StoryServiceTest
     [Test]
     public void WhenSomeStoriesAreNotFoundInCacheGetStoriesShouldInvokeStoryProviderForMissingStoriesOnlyAndReturnAllStories()
     {
-        var storyRetrievalTask = new Task<Story?>(TestUtils.CreateStory);
+        var storyRetrievalTask = new Task<Story?>(() => new Story());
         storyRetrievalTask.RunSynchronously();
         var ids = TestUtils.CreateListOfIds(2);
         _storyCache.GetStory(0).Returns(default(Story));
-        _storyCache.GetStory(1).Returns(TestUtils.CreateStory());
+        _storyCache.GetStory(1).Returns(new Story());
         _storyProvider.GetStory(0).Returns(storyRetrievalTask);
 
         var results = _sut.GetStories(ids);

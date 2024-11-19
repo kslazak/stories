@@ -1,4 +1,5 @@
 using StoriesAPI;
+using StoriesAPI.Models;
 
 namespace StoriesUnitTests;
 
@@ -8,7 +9,7 @@ public class CacheItemTest
     [Test]
     public void ConstructorShouldPopulateValueProperly()
     {
-        var story = TestUtils.CreateStory();
+        var story = new Story();
         
         var result = new CacheItem(story);
 
@@ -18,7 +19,7 @@ public class CacheItemTest
     [Test]
     public void ConstructorShouldPopulateCreatedAtProperly()
     {
-        var story = TestUtils.CreateStory();
+        var story = new Story();
         var now = DateTime.UtcNow;
 
         var result = new CacheItem(story);
