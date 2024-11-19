@@ -73,7 +73,9 @@ public class StoryCacheTest
         var results = _sut.GetBestStoryIds(3);
 
         Assert.That(results != null);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         Assert.That(results.Count == 3);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         Assert.That(results.Contains(4) && results.Contains(5) && results.Contains(6));
     }
 
