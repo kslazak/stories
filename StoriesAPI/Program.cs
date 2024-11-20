@@ -14,7 +14,12 @@ var apiInfo = new OpenApiInfo
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton<IStoryProvider, StoryProvider>();
+
+if (args.Length > 0 && args[0] == "-UseMock")
+    builder.Services.AddSingleton<IStoryProvider, StoryProviderMock>();
+else
+    builder.Services.AddSingleton<IStoryProvider, StoryProvider>();
+
 builder.Services.AddSingleton<IConfigurationProvider, ConfigurationProvider>();
 builder.Services.AddSingleton<IStoryCache, StoryCache>();
 builder.Services.AddSingleton<IStoryService, StoryService>();
