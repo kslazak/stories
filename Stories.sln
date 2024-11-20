@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesIntegrationTests", "StoriesIntegrationTests\StoriesIntegrationTests.csproj", "{7697A71A-E098-47C0-B8B3-B45A6BB9ACEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoriesBehaviorTests", "StoriesBehaviorTests\StoriesBehaviorTests.csproj", "{B94D5C7C-D650-4A1E-BBF6-EBB2E3781FEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{7697A71A-E098-47C0-B8B3-B45A6BB9ACEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7697A71A-E098-47C0-B8B3-B45A6BB9ACEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7697A71A-E098-47C0-B8B3-B45A6BB9ACEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94D5C7C-D650-4A1E-BBF6-EBB2E3781FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94D5C7C-D650-4A1E-BBF6-EBB2E3781FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94D5C7C-D650-4A1E-BBF6-EBB2E3781FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94D5C7C-D650-4A1E-BBF6-EBB2E3781FEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
