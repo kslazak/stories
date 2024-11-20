@@ -6,7 +6,7 @@ namespace StoriesAPI.Models;
 public class Story
 {
     /// <summary>
-    /// Default ctor.
+    /// Default constructor.
     /// </summary>
     public Story()
     {
@@ -16,7 +16,6 @@ public class Story
         Time = DateTime.UnixEpoch.AddSeconds(1).ToString("yyyy-MM-ddTHH:mm:sszzz");
         Score = 0;
         CommentCount = 0;
-
     }
 
     /// <summary>

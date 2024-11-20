@@ -15,7 +15,7 @@ public class StoryTest
         
         var result = new Story(externalStory);
 
-        Assert.That(result.Title == expectedTitle);
+        Assert.That(result.Title, Is.EqualTo(expectedTitle));
     }
 
     [TestCase("http://www.test.org", "http://www.test.org")]
@@ -28,7 +28,7 @@ public class StoryTest
 
         var result = new Story(externalStory);
 
-        Assert.That(result.Uri == expectedUri);
+        Assert.That(result.Uri, Is.EqualTo(expectedUri));
     }
 
     [TestCase("user", "user")]
@@ -41,7 +41,7 @@ public class StoryTest
 
         var result = new Story(externalStory);
 
-        Assert.That(result.PostedBy == expectedPostedBy);
+        Assert.That(result.PostedBy, Is.EqualTo(expectedPostedBy));
     }
 
     [TestCase(1, "1970-01-01T00:00:01+00:00")]
@@ -52,7 +52,7 @@ public class StoryTest
 
         var result = new Story(externalStory);
 
-        Assert.That(result.Time == expectedTime);
+        Assert.That(result.Time, Is.EqualTo(expectedTime));
     }
 
     [TestCase(0, 0)]
@@ -64,7 +64,7 @@ public class StoryTest
 
         var result = new Story(externalStory);
 
-        Assert.That(result.Score == expectedScore);
+        Assert.That(result.Score, Is.EqualTo(expectedScore));
     }
 
     [TestCase(0, 0)]
@@ -76,6 +76,6 @@ public class StoryTest
 
         var result = new Story(externalStory);
 
-        Assert.That(result.CommentCount == expectedCommentCount);
+        Assert.That(result.CommentCount, Is.EqualTo(expectedCommentCount));
     }
 }

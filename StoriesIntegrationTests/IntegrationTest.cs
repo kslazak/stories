@@ -20,6 +20,7 @@ public class IntegrationTest
     public void TearDown()
     {
         _hostProcess?.Kill();
+        _hostProcess?.Dispose();
     }
 
     [TestCase(1)]
@@ -28,9 +29,9 @@ public class IntegrationTest
     {
         var request = new RestRequest($"/best?count={count}");
 
-        var result = _client.Get<IEnumerable<Story>>(request);
+        var results = _client.Get<IEnumerable<Story>>(request);
 
-        Assert.That(result?.Count() == count);
+        Assert.That(results?.Count(), Is.EqualTo(count));
     }
 
     [Test]

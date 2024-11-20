@@ -13,7 +13,7 @@ public class CacheItemTest
         
         var result = new CacheItem(story);
 
-        Assert.That(result.Value == story);
+        Assert.That(result.Value, Is.EqualTo(story));
     }
 
     [Test]
@@ -24,6 +24,6 @@ public class CacheItemTest
 
         var result = new CacheItem(story);
 
-        Assert.That(result.CreatedAt - now < TimeSpan.FromSeconds(1));
+        Assert.That(result.CreatedAt - now, Is.LessThan(TimeSpan.FromSeconds(1)));
     }
 }

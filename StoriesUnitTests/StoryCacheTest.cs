@@ -33,7 +33,7 @@ public class StoryCacheTest
     {
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results == null);
+        Assert.That(results, Is.Null);
     }
 
     [TestCase(1)]
@@ -46,7 +46,7 @@ public class StoryCacheTest
 
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results == null);
+        Assert.That(results, Is.Null);
     }
 
     [TestCase(1)]
@@ -60,7 +60,7 @@ public class StoryCacheTest
 
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results == null);
+        Assert.That(results, Is.Null);
     }
 
     [TestCase(2)]
@@ -72,7 +72,7 @@ public class StoryCacheTest
 
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results == null);
+        Assert.That(results, Is.Null);
     }
 
     [TestCase(1)]
@@ -84,7 +84,7 @@ public class StoryCacheTest
 
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results?.Count == count);
+        Assert.That(results?.Count, Is.EqualTo(count));
     }
 
     #endregion GetBestStoryIds tests
@@ -99,11 +99,14 @@ public class StoryCacheTest
 
         var results = _sut.GetBestStoryIds(3);
 
-        Assert.That(results != null);
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-        Assert.That(results.Count == 3);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-        Assert.That(results.Contains(4) && results.Contains(5) && results.Contains(6));
+        Assert.Multiple(() =>
+        {
+            Assert.That(results, Is.Not.Null);
+            Assert.That(results, Has.Count.EqualTo(3));
+            Assert.That(results?.Contains(4) ?? false);
+            Assert.That(results?.Contains(5) ?? false);
+            Assert.That(results?.Contains(6) ?? false);
+        });
     }
 
     #endregion SetBestStoryIds tests
@@ -115,7 +118,7 @@ public class StoryCacheTest
     {
         var result = _sut.GetStory(1);
 
-        Assert.That(result == null);
+        Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -127,7 +130,7 @@ public class StoryCacheTest
 
         var result = _sut.GetStory(1);
 
-        Assert.That(result == null);
+        Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -140,7 +143,7 @@ public class StoryCacheTest
 
         var result = _sut.GetStory(1);
 
-        Assert.That(result == null);
+        Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -151,7 +154,7 @@ public class StoryCacheTest
 
         var result = _sut.GetStory(1);
 
-        Assert.That(result == story);
+        Assert.That(result, Is.EqualTo(story));
     }
 
     #endregion GetStory tests
@@ -168,7 +171,7 @@ public class StoryCacheTest
         _sut.AddOrUpdateStory(1, updatedStory);
 
         var result = _sut.GetStory(1);
-        Assert.That(result == updatedStory);
+        Assert.That(result, Is.EqualTo(updatedStory));
     }
 
     #endregion AddOrUpdateStory tests

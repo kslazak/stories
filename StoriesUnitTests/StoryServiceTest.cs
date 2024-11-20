@@ -37,7 +37,7 @@ public class StoryServiceTest
 
         var results = _sut.GetBestStoryIds(count);
 
-        Assert.That(results.Count == count);
+        Assert.That(results, Has.Count.EqualTo(count));
         _storyProvider.DidNotReceive().GetBestStoryIds();
     }
 
@@ -64,7 +64,7 @@ public class StoryServiceTest
 
         var results = _sut.GetBestStoryIds(requestedCount);
 
-        Assert.That(results.Count == Math.Min(requestedCount, providedCount));
+        Assert.That(results, Has.Count.EqualTo(Math.Min(requestedCount, providedCount)));
     }
 
     [TestCase(1, 200)]
@@ -97,7 +97,7 @@ public class StoryServiceTest
 
         var results = _sut.GetStories(ids);
 
-        Assert.That(results.Count() == count);
+        Assert.That(results.Count(), Is.EqualTo(count));
         _storyProvider.DidNotReceive().GetStory(Arg.Any<int>());
     }
 
@@ -131,7 +131,7 @@ public class StoryServiceTest
         
         var results = _sut.GetStories(ids);
 
-        Assert.That(results.Count() == count);
+        Assert.That(results.Count(), Is.EqualTo(count));
     }
 
     [TestCase(1)]
@@ -166,7 +166,7 @@ public class StoryServiceTest
 
         var results = _sut.GetStories(ids);
 
-        Assert.That(results.Count() == 2);
+        Assert.That(results.Count(), Is.EqualTo(2));
         _storyProvider.DidNotReceive().GetStory(1);
         _storyCache.Received(1).AddOrUpdateStory(0, Arg.Any<Story>());
     }
